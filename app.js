@@ -14,4 +14,4 @@ app.use(serveStaticMiddleware);
 app.use(renderMiddleware);
 app.use(router.routes());
 
-export { app };
+app.listen({ port: 7777 });
