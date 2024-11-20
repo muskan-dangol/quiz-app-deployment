@@ -1,0 +1,23 @@
+<% layout("./layouts/layout.eta") %>
+
+<h3>Login form</h3>
+
+<form method="POST" action="/auth/login" >
+  <div style="display: flex; align-items: center; gap: 10px; ">
+    Email:<br/>
+    <input type="email" name="email" /><br/>
+  </div>
+    
+  <div style="display: flex; align-items: center; gap: 10px; margin: 5px 0;">
+    Password:<br/>
+    <input type="password" name="password" /><br/>
+  </div>
+  
+  <input type="submit" value="Login" />
+  <% if (it.error) { %>
+    <p style="color: red;"><%= it.error %></p>
+  <% } %>
+  
+</form>
+
+<a href="/auth/register">Not yet registered? Register here.</a>

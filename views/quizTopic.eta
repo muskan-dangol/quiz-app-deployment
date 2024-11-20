@@ -1,0 +1,18 @@
+<% layout("./layouts/layout.eta") %>
+
+<h3>Available topics</h3>
+<% if (it.availableTopics && it.availableTopics.length > 0) { %>
+  
+  <ul>
+  <% it.availableTopics.forEach(topic => { %>
+    <% if (it.isAdmin) { %>
+      <li style="align-items: center; gap: 10px; margin: 5px 0;"><a href="/topics/<%= topic.id %>"><%= topic.name %></a>
+      <form method="POST" action="/topics/<%= topic.id %>/delete">
+        <input type="submit" value="Delete"/>
+      </form></li>
+    <% } else { %>
+      <li style="align-items: center; gap: 10px; margin: 5px 0;"><a href="/quiz/<%= topic.id %>"><%= topic.name %></a></li>
+    <% } %>
+  <% }); %>
+  </ul>
+<% } %>

@@ -1,0 +1,39 @@
+<% layout("./layouts/layout.eta") %>
+
+<% if (it.isAdmin === true) { %>
+<h4>Add topics</h4>
+  <form method="POST" action="/topics">
+    <label for="name">Name:</label><br />
+    <input 
+      type="text" style="display: inline;"
+      name="name" 
+      value="<%= it.name ? it.name : "" %>" 
+    /><br />
+    <% if (it.validationErrors && it.validationErrors.name) { %>
+      <span style="color: red;"><%= it.validationErrors.name %></span><br />
+    <% } %>
+    <input type="submit" value="Add" />
+  </form>
+<% } %>
+
+
+
+<% if (it.availableTopics && it.availableTopics.length > 0) { %>
+
+<h3>Available topics</h3>
+<ul>
+<% it.availableTopics.forEach(topic => { %>
+  <% if (it.isAdmin) { %>
+    <li style="display: flex; align-items: center; gap: 10px;">
+    <a href="/topics/<%= topic.id %>"><%= topic.name %></a>
+    <form method="POST" action="/topics/<%= topic.id %>/delete" >
+      <input type="submit" value="Delete" style="margin: 0; padding: 2px 6px; font-size: 14px;">
+    </form>
+  </li>
+  <% } else { %>
+    <li><a href="/quiz/<%= topic.id %>"><%= topic.name %></a></li>
+  <% } %>
+<% }); %>
+</ul>
+<% } %>
+

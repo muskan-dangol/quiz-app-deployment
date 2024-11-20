@@ -1,0 +1,16 @@
+<% layout("./layouts/layout.eta") %>
+<a style="display: inline-block;" href="/quiz">Go back to topics</a>
+<h3>Quiz: <%= it.topic.name %></h3>
+
+<h4>Question: <%= it.question.question_text %></h4>
+
+
+  <% it.options.forEach(option => { %>
+    <label style="display: flex; gap: 10px;">
+      <%= option.option_text %>
+      <form method="POST" action="/quiz/<%= it.topic.id %>/questions/<%= it.question.id %>/options/<%= option.id %>">
+        <input type="submit" value="Choose" style="margin: 0; padding: 2px 6px; "/>
+      </form>
+    </label><br/>
+  <% }); %>
+
