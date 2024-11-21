@@ -32,7 +32,10 @@ const addQuestion = async ({ request, response, render, params, state }) => {
 
   if (!passes) {
     questionData.validationErrors = errors;
+   
     render("topic.eta", {
+      topic: await topicService.getTopicById(topicId),
+      availableQuestions: await questionService.getQuestionsByTopicId(topicId),
       ...questionData,
       isAdmin: true,
     });

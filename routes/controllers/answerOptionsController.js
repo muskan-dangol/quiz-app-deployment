@@ -29,19 +29,20 @@ const addAnswerOption = async ({ request, response, render, params }) => {
 
   if (!passes) {
     answerOptionData.validationErrors = errors;
+    const topic = await topicService.getTopicById(id);
+    const question = await questionService.getQuestionById(qId);
+    const answerOptions =
+      await answerOptionService.getAnswerOptionsByQuestionId(qId);
+
     render("answerOption.eta", {
       ...answerOptionData,
+      validationErrors: errors,
       isAdmin: true,
-      topicId: id,
-      questionId: qId,
+      topic,
+      question,
+      answerOptions,
     });
-  } else {
-    await answerOptionService.addAnswerOptions(
-      qId,
-      answerOptionData.option_text,
-      answerOptionData.is_correct
-    );
-    response.redirect(`/topics/${id}/questions/${qId}`);
+    return;
   }
 };
 
@@ -58,7 +59,6 @@ const showAnswerOptionForm = async ({ response, render, params, state }) => {
   const answerOptions = await answerOptionService.getAnswerOptionsByQuestionId(
     questionId
   );
-  console.log(answerOptions);
 
   render("answerOption.eta", {
     topic,

@@ -15,6 +15,16 @@
     Answer Option:<br/>
     <textarea name="option_text"><%= it.option_text  ? it.option_text  : "" %></textarea><br/>
     <input type="checkbox" name="is_correct" <% if (it.is_correct) { %> checked <% } %> />
+    
+    <% if (it.validationErrors) { %>
+  <ul>
+      <% Object.keys(it.validationErrors).forEach((attribute) => { %>
+          <% Object.values(it.validationErrors[attribute]).forEach((err) => { %>
+              <li><%= err %></li>
+          <% }); %>
+      <% }); %>
+  </ul>
+<% } %>
     <br/>
     <input type="submit" value="Add Option"/>
   </form>

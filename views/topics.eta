@@ -1,6 +1,8 @@
 <% layout("./layouts/layout.eta") %>
 
 <% if (it.isAdmin === true) { %>
+<a style="display: inline-block;" href="/quiz">Quiz</a>
+
 <h4>Add topics</h4>
   <form method="POST" action="/topics">
     <label for="name">Name:</label><br />
@@ -9,9 +11,15 @@
       name="name" 
       value="<%= it.name ? it.name : "" %>" 
     /><br />
-    <% if (it.validationErrors && it.validationErrors.name) { %>
-      <span style="color: red;"><%= it.validationErrors.name %></span><br />
-    <% } %>
+    <% if (it.validationErrors) { %>
+      <ul>
+          <% Object.keys(it.validationErrors).forEach((attribute) => { %>
+              <% Object.values(it.validationErrors[attribute]).forEach((err) => { %>
+                  <li><%= err %></li>
+              <% }); %>
+          <% }); %>
+      </ul>
+    <% } %>   
     <input type="submit" value="Add" />
   </form>
 <% } %>

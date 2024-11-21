@@ -2,10 +2,13 @@
 
 <h3>Multi-choice question application</h3>
 
-<p>This is an application which is used for repeated practice of learned content. 
-The application provides a list of topics and allows creating multiple-choice questions into those topics that are then answered by self and others. 
-The application also shows basic statistics: the total number of available questions and the total number of question answers. 
-In addition, the application also provides an API for retrieving and answering random questions</p>
+<p>
+  This is an application which is used for repeated practice of learned content. 
+  The application provides a list of topics and allows creating multiple-choice questions into those topics that are then answered by self and others. 
+  The total number of available topics in the application is <%= it.topicLength %>, the total number of questions is <%= it.questionLength %>, and the total number of question-answers is  <%= it.questionAnswersLength %>. 
+  In addition, the application also provides an API for retrieving and answering random questions.
+</p>
+
 
 <p>If you haven't used the application before, 
 you can start by <a href="/auth/register">registering</a>. 

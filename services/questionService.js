@@ -1,5 +1,10 @@
 import { sql } from "../database/database.js";
 
+const getAllQuestion = async () => {
+  const rows = await sql`SELECT * FROM questions`;
+  return rows;
+};
+
 const getQuestionById = async (questionId) => {
   const result = await sql`SELECT * FROM questions WHERE id =${questionId}`;
   return result[0];
@@ -46,6 +51,7 @@ const getRandomQuestion = async () => {
 };
 
 export {
+  getAllQuestion,
   getQuestionById,
   getQuestionsByTopicId,
   addQuestion,
